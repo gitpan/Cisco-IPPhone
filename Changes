@@ -15,3 +15,6 @@ Revision history for Perl extension IPPhone.
           Nate Mueller - nate@cs.wisc.edu
 	- Added all header fields recognized by the phone including 
 	  Refresh, URL, Location, Cookie, Location, Expires, Date
+0.05  Tue Dec  3 12:00:34  2002
+	- Changed expires header to lower case
+	- Fixed bug in IconMenu

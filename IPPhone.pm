@@ -27,7 +27,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 # Preloaded methods go here.
@@ -99,13 +99,13 @@ sub Content {
      }
   }
   if ($options->{Location}) {
-     $header .= "Location: $options->{Location}\n";
+     $header .= "location: $options->{Location}\n";
   }
   if ($options->{Date}) {
-     $header .= "Date: $options->{Date}\n";
+     $header .= "date: $options->{Date}\n";
   }
   if ($options->{Expires}) {
-     $header .= "Expires: $options->{Expires}\n";
+     $header .= "expires: $options->{Expires}\n";
   }
   if ($options->{Cookie}) {
      $header .= "Set-Cookie: $options->{Cookie}\n";
@@ -161,6 +161,7 @@ sub MenuItem {
   my $self = shift;
   my $options = shift if (@_);
   push @{$self->{xmlobject}},"<MenuItem>\n";
+  push @{$self->{xmlobject}}, "<IconIndex>$options->{IconIndex}</IconIndex>\n" if $options->{IconIndex};
   push @{$self->{xmlobject}}, "<Name>$options->{Name}</Name>\n";
   push @{$self->{xmlobject}}, "<URL>$options->{URL}</URL>\n";
   push @{$self->{xmlobject}},"</MenuItem>\n";
@@ -177,6 +178,7 @@ sub AddMenuItem {
   my $lastline = pop @{$self->{xmlobject}};
 
   push @{$self->{xmlobject}},"<MenuItem>\n";
+  push @{$self->{xmlobject}}, "<IconIndex>$options->{IconIndex}</IconIndex>\n" if $options->{IconIndex};
   push @{$self->{xmlobject}},"<Name>$options->{Name}</Name>\n";
   push @{$self->{xmlobject}},"<URL>$options->{URL}</URL>\n";
   push @{$self->{xmlobject}},"</MenuItem>\n";
@@ -888,38 +890,46 @@ B<This method takes a title, prompt, and text as input.>
  use IPPhone;
  $mygraphicmenu = new IPPhone;
 
- $data = "0C3F0F030C3F0C303F3F";
+ $data = "FFFFFFFFFFFFFFFFFFFF";
 
  # Create Menu Object
  $mygraphicmenu->GraphicMenu( { Title => "My Image", 
                  Prompt => "View the image",
                  LocationX => "-1", LocationY => "-1", 
-                 Width => "5",
-                 Height => "5", 
+                 Width => "10",
+                 Height => "10", 
                  Depth => "2", 
                  Data => "$data" });
+
  print $mygraphicmenu->Content;
 
 =item * $object->IconMenu
 
- use IPPhone;
+ use Cisco::IPPhone;
 
- $myiconmenu = new IPPhone;
+ $myiconmenu = new Cisco::IPPhone;
 
- $data = "0C3F0F030C3F0C303F3F";
+ $data = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
 
  # Create Icon Menu
- $myiconmenu->IconMenu( { Title => "My Title", 
-                   Prompt => "My Prompt" });
-
- $myiconmenu->AddMenuItem({ Name => "Item 2", 
-                        URL => "http://www.mydomain.com" });
+ $myiconmenu->IconMenu( { Title => "Icon Menu", 
+                   Prompt => "Select an icon" });
  
+ $myiconmenu->AddMenuItem({  IconIndex => "1", 
+                            Name => "Menu Item 1", 
+     URL => "http://192.168.250.31/cgi-bin/metavante/text.cgi" });
+ $myiconmenu->AddMenuItem({  IconIndex => "1", 
+                            Name => "Menu Item 2", 
+     URL => "http://192.168.250.31/cgi-bin/metavante/text.cgi" });
+ $myiconmenu->AddMenuItem({  IconIndex => "1", 
+                            Name => "Menu Item 3", 
+     URL => "http://192.168.250.31/cgi-bin/metavante/text.cgi" });
+
  # Index is the numeric index of the icon to be displayed
  # Up to 10 instances of iconitem can be displayed
  $myiconmenu->AddIconItem ({ Index => "1", 
-                            Width => "5",
-                            Height => "5", 
+                            Width => "10",
+                            Height => "10", 
                             Depth => "2", 
                             Data => "$data" });
 

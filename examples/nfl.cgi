@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 
-# Mark Palmer markpalmer@us.ibm.com
-
 use Cisco::IPPhone;
 use LWP;
 
@@ -45,18 +43,11 @@ foreach $line (@lines) {
 
 $mytext->Text( { Title => "NFL Scores from nfl.com", Prompt => "Go Packers", 
           Text => "$text" });
-$mytext->AddSoftKeyItem( { Name => "Update", URL => "SoftKey:Update", 
-                           Position => "1" });
-$mytext->AddSoftKeyItem( { Name => "Exit", URL => "SoftKey:Exit", 
-                           Position => "2" });
-print $mytext->Content ({ Refresh=>"60" });
+print $mytext->Content({Refresh => "60"});
+
 } else {
   $mytext->Text( { Title => "NFL Scores from nfl.com", Prompt => "Go Packers", 
                            Text => "Unable to access $completeurl" });
-  $mytext->AddSoftKeyItem( { Name => "Update", URL => "SoftKey:Update", 
-                           Position => "1" });
-  $mytext->AddSoftKeyItem( { Name => "Exit", URL => "SoftKey:Exit", 
-                           Position => "2" });
   print $mytext->Content;
 }
 

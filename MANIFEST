@@ -16,6 +16,7 @@ examples/graphicmenu.cgi
 examples/iconmenu.cgi
 examples/image.cgi
 examples/image_ibm.cgi
+examples/imagecap.cgi
 examples/input.cgi
 examples/menu.cgi
 examples/nfl.cgi
