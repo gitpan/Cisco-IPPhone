@@ -27,7 +27,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 # Preloaded methods go here.
@@ -600,20 +600,18 @@ Cisco::IPPhone - Package for creating Cisco IPPhone XML objects
 
 =head1 SYNOPSIS
 
-use Cisco::IPPhone;
+ use Cisco::IPPhone;
 
-$mytext = new Cisco::IPPhone;
+ $mytext = new Cisco::IPPhone;
 
-$mytext->Text({ Title => "My Title", Prompt => "My Prompt", 
+ $mytext->Text({ Title => "My Title", Prompt => "My Prompt", 
                            Text => "My Text" });
-$mytext->AddSoftKeyItem( { Name => "Update", URL => "SoftKey:Update", 
+ $mytext->AddSoftKeyItem( { Name => "Update", URL => "SoftKey:Update", 
                            Position => "1" });
-$mytext->AddSoftKeyItem( { Name => "Exit", URL => "SoftKey:Exit", 
+ $mytext->AddSoftKeyItem( { Name => "Exit", URL => "SoftKey:Exit", 
                            Position => "2" });
 
-print $mytext->Content;
-
-__END__
+ print $mytext->Content;
 
 =head1 DESCRIPTION
 
