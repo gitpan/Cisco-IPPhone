@@ -4,9 +4,11 @@ IPPhone.pm
 MANIFEST
 Makefile.PL
 test.pl
-graphics/Cip.8bi
+graphics/cip.8bi
 graphics/cip2gif.exe
 graphics/gif2cip.exe
+graphics/cip2img
+graphics/img2cip
 examples/directory.cgi  
 examples/error.cgi
 examples/execute.cgi

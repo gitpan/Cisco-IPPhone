@@ -27,7 +27,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 	
 );
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 # Preloaded methods go here.
@@ -87,9 +87,36 @@ sub Print {
 sub Content {
   my $self = shift;
   my $options = shift if (@_);
-  $options->{Refresh} = '0' unless $options->{Refresh}; # def is no timeout
-  $options->{URL} = "" unless $options->{URL}; # def is refresh current URL
-  ${$self->{xmlobject}}[0] = "refresh: $options->{Refresh}; $options->{URL}\nContent-Type: text/xml\n\n${$self->{xmlobject}}[0]";
+  # Assume Content-Type is text/xml unless otherwise specified
+  my $header = '';
+
+  if ($options->{Refresh}) {
+     $header .= "refresh: $options->{Refresh};";
+     if ($options->{URL}) {
+        $header .= " url=$options->{URL}\n";
+     } else {
+        $header .= "\n";
+     }
+  }
+  if ($options->{Location}) {
+     $header .= "Location: $options->{Location}\n";
+  }
+  if ($options->{Date}) {
+     $header .= "Date: $options->{Date}\n";
+  }
+  if ($options->{Expires}) {
+     $header .= "Expires: $options->{Expires}\n";
+  }
+  if ($options->{Cookie}) {
+     $header .= "Set-Cookie: $options->{Cookie}\n";
+  }
+  if ($options->{Type}) {
+     $header .= "Content-Type: $options->{Type}\n\n";
+  } else {
+     $header .= "Content-Type: text/xml\n\n";
+  }
+
+  ${$self->{xmlobject}}[0] = "${header}${$self->{xmlobject}}[0]";
   return @{$self->{xmlobject}};
 }
 
@@ -710,7 +737,7 @@ B<This method takes a title, prompt, and text as input.>
 
  # Add a menuitem to the menu object
  $mymenu->AddMenuItem({ Name => "Item 2", 
-                        URL => "http://www.mbmc.com" });
+                        URL => "http://www.mydomain.com" });
 
 =item * $object->AddMenuItemObject
 
@@ -1021,7 +1048,23 @@ B<This method takes a title, prompt, and text as input.>
  
  # Print the Object to the phone with an automatic refresh every 60 seconds
  # Refresh with a different URL
- print $object->Content(Refresh=>'60', URL=>"http://www.def.com/cgi-bin/t.cgi");
+ print $object->Content(Refresh=>'60', URL=>"http://www.my.com/cgi-bin/t.cgi");
+ 
+ # Expires page before current time (expires page immediately)
+ print $object->Content(Date=>'Tue, 15 May 2002 23:45:04 GMT');
+ print $object->Content(Expires=>'Tue, 15 May 2002 23:44:04 GMT');
+
+ # Expiration is date and time of request minus one minute
+ print $object->Content(Date=>'Tue, 15 May 2002 23:45:04 GMT');
+ print $object->Content(Expires=>'-1');
+
+ # Set a cookie. The IP Phone will use up to 4 cookies of 255 bytes in length
+ print $object->Content(Cookie=>'MyCookieName=Bingo; path=/');
+
+ # Go to a specified location in conjuntion with a status code such as
+ # 301 Moved Permanently, 303 See Other, 307 Temporary Redirect, or 
+ # 302 Object Moved.  Combined with user-agent logic, this can be effective
+ print $object->Content(Location=>'http://services.acme.com');
 
 =item * $object->Content_Noheader
 

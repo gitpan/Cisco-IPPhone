@@ -4,12 +4,9 @@
 
 use Cisco::IPPhone;
 use LWP;
-use CGI;
 
 $ua = LWP::UserAgent->new;
 $mytext = new Cisco::IPPhone;
-$error = new Cisco::IPPhone;
-$query = new CGI;
 
 my $host = "www.nfl.com";
 my $url = "scores";

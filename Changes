@@ -9,3 +9,9 @@ Revision history for Perl extension IPPhone.
 	- Added wantarray return values
 	- fixed parsing bugs in nfl.cgi
 	- modified execute.cgi to push objects to IPPhones
+0.04  Tue Nov  5 14:14:26  2002
+	- Added Pure Perl graphics capability to convert images to CIP
+          and CIP to images using Perl GD module. Code contributed by
+          Nate Mueller - nate@cs.wisc.edu
+	- Added all header fields recognized by the phone including 
+	  Refresh, URL, Location, Cookie, Location, Expires, Date
