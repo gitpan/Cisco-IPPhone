@@ -3,4 +3,9 @@ Revision history for Perl extension IPPhone.
 0.01  Fri Jul 12 14:38:57 2002
 	- original version; created by h2xs 1.20 with options
 		-AXc -n IPPhone
-
+0.02  Fri Oct 25 14:22:01 2002
+	- Removed CTRL-M's from several modules
+0.03  Fri Nov 1 11:22:01 2002
+	- Added wantarray return values
+	- fixed parsing bugs in nfl.cgi
+	- modified execute.cgi to push objects to IPPhones

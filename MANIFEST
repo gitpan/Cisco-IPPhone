@@ -10,7 +10,6 @@ graphics/gif2cip.exe
 examples/directory.cgi  
 examples/error.cgi
 examples/execute.cgi
-examples/execute2.cgi
 examples/graphicmenu.cgi
 examples/iconmenu.cgi
 examples/image.cgi
