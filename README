@@ -1,0 +1,58 @@
+Cisco/IPPhone version 0.01
+============================
+
+Cisco::IPPhone - Package for creating Cisco IPPhone XML applications
+
+This Cisco IPPhone module was created to provide a simple convenient
+method to display Cisco IP Phone objects and gather input from a Cisco
+7940 or 7960 IP Phone.  This module supports all known Cisco XML objects
+for 7940 and 7960 phones.  Knowledge of Cisco XML syntax is not a requirement.
+
+This Perl module gives the ability to use simple PERL objects to display XML on the IP Phone unlike to Cisco Software Development Kit (SDK) which uses Microsoft IIS Server, ASP's, JSP's, Javascript, COM Objects, and requires knowledge of XML syntax. 
+
+Requirements:
+
+Developing Cisco IPPhone XML applications using the Cisco::IPPhone module requires the following:
+ - Cisco CallManager Software or the CallManager Emulator Software
+ - Any web server capable of running Perl CGI (Apache, etc)
+ - A Cisco 7940 or 7960 IPPhone for testing the applications
+
+Graphics:
+
+Use cip2gif, gif2cip, or the photoshop plugin to create the cip files
+and use the data portion of the cip file in your Perl XML objects.
+
+The following list gives typical services that might be supplied to a phone:
+
+ - Weather
+ - Stock information
+ - Contact information
+ - Company news
+ - To-do lists
+ - Real-time NFL scores
+ - Daily schedule
+
+If you would like your XML app distributed with this module under the examples
+directory on CPAN, please email the app to Mark Palmer - markpalmer@us.ibm.com
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+  None
+
+COPYRIGHT AND LICENCE
+
+Put the correct copyright and licence information here.
+
+Copyright (C) 2002 Mark Palmer markpalmer@us.ibm.com
+
